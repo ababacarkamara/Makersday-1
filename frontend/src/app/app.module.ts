@@ -13,7 +13,7 @@ import { EditComponent } from './components/edit/edit.component';
 
 const routes: Routes = [
   { path: 'create' , component: CreateComponent },
-  { path: 'edit/id' , component: EditComponent },
+  { path: 'edit/:id' , component: EditComponent },
   { path: 'list' , component: ListComponent },
   { path: '' , redirectTo: 'list', pathMatch: 'full' }
 ];
