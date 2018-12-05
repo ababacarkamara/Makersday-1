@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import mongoose from 'mongose';
+import mongoose from 'mongoose';
 
 import Eleve from './models/Eleves';
 import Eleves from './models/Eleves';
-import { runInNewContext } from 'vm';
+
 
 const app = express();
 const router = express.Router();
