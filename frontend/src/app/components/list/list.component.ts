@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
+
+import { Eleve } from '../../eleve.model';
 import { EleveService } from '../../eleve.service';
 @Component({
   selector: 'app-list',
@@ -7,12 +11,32 @@ import { EleveService } from '../../eleve.service';
 })
 export class ListComponent implements OnInit {
 
-  constructor(private eleveService: EleveService) { }
+  eleves: Eleve[];
+  displayedColumns = ['civilite', 'prenom', 'nom', 'age', 'actions'];
+
+
+  constructor(private eleveService: EleveService, private router: Router) { }
 
   ngOnInit() {
-    this.eleveService.getEleves().subscribe((eleves) => {
-      console.log(eleves);
-    });
+    this.fetchEleves();
   }
 
+  fetchEleves() {
+    this.eleveService
+      .getEleves()
+      .subscribe((data: Eleve[]) => {
+        this.eleves = data;
+        console.log('Data requested ...');
+        console.log(this.eleves);
+      });
+  }
+  editEleve(id) {
+    this.router.navigate([`/edit/${id}`]);
+  }
+
+  deleteEleve(id) {
+    this.eleveService.deleteEleve(id).subscribe(() => {
+      this.fetchEleves();
+    });
+  }
 }
